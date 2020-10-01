@@ -10,9 +10,9 @@ public enum SolverKind
     Progressive,
 }
 
-public interface IBloatedLettersSolver
+public interface IBloatLettersSolver
 {
     void InitializeLetters(ref List<GameObject> letters);
-    bool IsBloated();
+    bool HasBloat();
     IEnumerator SolveNext(Func<IEnumerator, Coroutine> coroutineStarter);
 }

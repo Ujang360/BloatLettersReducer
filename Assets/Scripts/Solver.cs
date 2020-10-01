@@ -56,7 +56,7 @@ public abstract class Solver
         DestroyLetter(letterGameObjects, index + 1);
     }
 
-    public virtual bool IsBloated()
+    public virtual bool HasBloat()
     {
         var solverKeys = solverLookupTable.Keys;
         var lettersStringRepresentation = GetStringRepresentation(letters);

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Solver2By2 : Solver, IBloatedLettersSolver
+public class Solver2By2 : Solver, IBloatLettersSolver
 {
     public void InitializeLetters(ref List<GameObject> letters) => this.letters = letters;
 
     public Solver2By2() : base()
     {
     }
-    
+
     public IEnumerator SolveNext(Func<IEnumerator, Coroutine> coroutineStarter)
     {
         yield return null;
@@ -21,7 +21,7 @@ public class Solver2By2 : Solver, IBloatedLettersSolver
             yield break;
         }
 
-        if (!IsBloated())
+        if (!HasBloat())
         {
             yield break;
         }

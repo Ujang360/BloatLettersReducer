@@ -8,7 +8,7 @@ public class LetterReducers : MonoBehaviour
     [SerializeField]
     private List<GameObject> letters;
     [SerializeField]
-    private IBloatedLettersSolver solver;
+    private IBloatLettersSolver solver;
 
     private LettersAligner aligner;
 
@@ -35,7 +35,7 @@ public class LetterReducers : MonoBehaviour
 
     private IEnumerator SolveIt()
     {
-        while (solver.IsBloated())
+        while (solver.HasBloat())
         {
             yield return solver.SolveNext(StartCoroutine);
             yield return new WaitForSeconds(3f);

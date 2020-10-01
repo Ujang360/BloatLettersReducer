@@ -1,6 +1,6 @@
 {
 "companyName": "Aditya Kresna",
-"productName": "BloatedLettersReducer",
+"productName": "BloatLettersReducer",
 "productVersion": "1.0.0",
 "dataUrl": "Builds.data.unityweb",
 "wasmCodeUrl": "Builds.wasm.code.unityweb",
