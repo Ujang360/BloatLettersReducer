@@ -37,10 +37,10 @@ public abstract class Solver
 
         if (letterGameObjects == null || letterGameObjects.Count == 0 || endIndex >= letterGameObjects.Count)
         {
-            return "";
+            return string.Empty;
         }
 
-        var chars = "";
+        var chars = string.Empty;
 
         for (var i = 0; i < count; ++i)
         {
@@ -55,6 +55,8 @@ public abstract class Solver
         SetLetter(letterGameObjects, index, newLetter);
         DestroyLetter(letterGameObjects, index + 1);
     }
+
+    public virtual void InitializeLetters(ref List<GameObject> letters) => this.letters = letters;
 
     public virtual bool HasBloat()
     {

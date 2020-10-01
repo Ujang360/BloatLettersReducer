@@ -48,15 +48,17 @@ public class LetterReducers : MonoBehaviour
         {
             case SolverKind.TwoByTwo:
                 solver = new Solver2By2();
-                solver.InitializeLetters(ref letters);
                 break;
             case SolverKind.StopOnChange:
+                solver = new SolverStopOnChange();
                 break;
             case SolverKind.Progressive:
                 break;
             default:
                 break;
         }
+
+        solver.InitializeLetters(ref letters);
     }
 
     public Coroutine SolveNext() => StartCoroutine(solver.SolveNext(StartCoroutine));

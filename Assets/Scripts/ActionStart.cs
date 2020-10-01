@@ -14,18 +14,9 @@ public class ActionStart : MonoBehaviour
         Destroy(transform.parent.gameObject);
     }
 
-    public void StartTwoByTwo()
-    {
-        StartSolver(SolverKind.TwoByTwo);
-    }
+    public void StartTwoByTwo() => StartSolver(SolverKind.TwoByTwo);
 
-    public void StartStopOnChange()
-    {
-        StartSolver(SolverKind.StopOnChange);
-    }
+    public void StartStopOnChange() => StartSolver(SolverKind.StopOnChange);
 
-    public void StartProgressive()
-    {
-        StartSolver(SolverKind.Progressive);
-    }
+    public void StartProgressive() => StartSolver(SolverKind.Progressive);
 }
