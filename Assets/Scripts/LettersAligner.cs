@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(NullUntracker))]
@@ -6,6 +7,8 @@ public class LettersAligner : MonoBehaviour
 {
     [SerializeField]
     private float PositionXOffset = 0.9f;
+    [SerializeField]
+    private float lerpingTime = 0.25f;
 
     private bool repositionedBefore = false;
     private List<GameObject> letters;
@@ -20,15 +23,17 @@ public class LettersAligner : MonoBehaviour
 
     private float GetLeftPosition(float totalWidth) => PositionXOffset + (-1f * (totalWidth / 2f));
 
-    private void RepositionLetters(float leftMostPosition)
+    private IEnumerator RepositionLetters(float leftMostPosition)
     {
+        yield return null;
         var previousWidth = 0f;
+        yield return new WaitForSeconds(0.25f);
 
         for (var i = 0; i < letters.Count; ++i)
         {
             var positionX = leftMostPosition + previousWidth;
             previousWidth += ((RectTransform)letters[i].transform).rect.width;
-            iTween.MoveTo(letters[i], new Vector3(positionX, 0, 0), 1);
+            iTween.MoveTo(letters[i], new Vector3(positionX, 0, 0), lerpingTime);
         }
     }
 
@@ -48,7 +53,7 @@ public class LettersAligner : MonoBehaviour
 
         var wordWidth = GetWordWidth();
         var leftMostPosition = GetLeftPosition(wordWidth);
-        RepositionLetters(leftMostPosition);
+        StartCoroutine(RepositionLetters(leftMostPosition));
         repositionedBefore = true;
 
         return true;

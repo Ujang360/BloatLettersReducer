@@ -537,6 +537,9 @@ MonoBehaviour:
   problemPrefab: {fileID: 3369675330151934041, guid: 9507c209b2787c645bb02a238f462618,
     type: 3}
   solverKindTitle: {fileID: 6902388220584288867}
+  buttonStepSolving: {fileID: 7012761208932720844}
+  buttonAutoSolving: {fileID: 7012761210087807676}
+  buttonExitToMenu: {fileID: 7012761209133667121}
 --- !u!1 &7012761209479455477
 GameObject:
   m_ObjectHideFlags: 0

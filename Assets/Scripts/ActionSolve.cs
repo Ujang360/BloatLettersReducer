@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ActionSolve : MonoBehaviour
@@ -9,8 +10,15 @@ public class ActionSolve : MonoBehaviour
     private GameObject problemPrefab;
     [SerializeField]
     private Text solverKindTitle;
+    [SerializeField]
+    private Button buttonStepSolving;
+    [SerializeField]
+    private Button buttonAutoSolving;
+    [SerializeField]
+    private Button buttonExitToMenu;
 
     private GameObject problemGameobject;
+    private LetterReducers letterReducers;
 
     private void Awake()
     {
@@ -34,18 +42,46 @@ public class ActionSolve : MonoBehaviour
             default:
                 break;
         }
+
+        letterReducers = problemGameobject.GetComponent<LetterReducers>();
+        letterReducers.InitSolver(solverKind);
     }
 
-    public void DoStepSolving()
+    private void DisableButtons()
     {
+        buttonAutoSolving.interactable = false;
+        buttonStepSolving.interactable = false;
+        buttonExitToMenu.interactable = false;
     }
 
-    public void DoAutoSolving()
+    private void EnableButtons()
     {
+        buttonAutoSolving.interactable = true;
+        buttonStepSolving.interactable = true;
+        buttonExitToMenu.interactable = true;
     }
+
+    private IEnumerator StepSolvingCoroutine()
+    {
+        DisableButtons();
+        yield return letterReducers.SolveNext();
+        EnableButtons();
+    }
+
+    private IEnumerator AutoSolvingCoroutine()
+    {
+        DisableButtons();
+        yield return letterReducers.SolveAutomatically();
+        EnableButtons();
+    }
+
+    public void DoStepSolving() => StartCoroutine(StepSolvingCoroutine());
+
+    public void DoAutoSolving() => StartCoroutine(AutoSolvingCoroutine());
 
     public void DoExitToMenu()
     {
+        DisableButtons();
         var startMenu = Instantiate(menuActionPrefab, transform.parent.parent);
         startMenu.name = startMenu.name.Replace("(Clone)", "");
         Destroy(problemGameobject);
