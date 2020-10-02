@@ -57,5 +57,7 @@ public class Solver2By2 : Solver, IBloatLettersSolver
                 }
             }
         }
+
+        yield return new WaitForSeconds(0.1f);
     }
 }

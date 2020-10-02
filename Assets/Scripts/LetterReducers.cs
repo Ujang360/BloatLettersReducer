@@ -38,7 +38,7 @@ public class LetterReducers : MonoBehaviour
         while (solver.HasBloat())
         {
             yield return solver.SolveNext(StartCoroutine);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -53,6 +53,7 @@ public class LetterReducers : MonoBehaviour
                 solver = new SolverStopOnChange();
                 break;
             case SolverKind.Progressive:
+                solver = new SolverProgressive();
                 break;
             default:
                 break;

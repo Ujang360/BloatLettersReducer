@@ -1,18 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class SolverProgressive : MonoBehaviour
+public class SolverProgressive : Solver, IBloatLettersSolver
 {
-    // Start is called before the first frame update
-    void Start()
+    public SolverProgressive() : base()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator SolveNext(Func<IEnumerator, Coroutine> coroutineStarter)
     {
-        
+        yield return null;
+
+        if (letters.Count < 2)
+        {
+            yield break;
+        }
+
+        if (!HasBloat())
+        {
+            yield break;
+        }
+
+        var lastChange = string.Empty;
+        var loopCounter = 0;
+
+        do
+        {
+            var firstLetter = string.IsNullOrEmpty(lastChange) ? GetLetter(letters, loopCounter) : lastChange;
+            var secondLetter = GetLetter(letters, loopCounter + 1);
+            var stringRepresentation = firstLetter + secondLetter;
+
+            if (solverLookupTable.ContainsKey(stringRepresentation))
+            {
+                lastChange = solverLookupTable[stringRepresentation];
+                DoReduce(letters, loopCounter, lastChange);
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
+
+            lastChange = string.Empty;
+            loopCounter++;
+        } while (loopCounter + 1 < letters.Count);
+
+        yield return new WaitForSeconds(0.1f);
     }
 }
+

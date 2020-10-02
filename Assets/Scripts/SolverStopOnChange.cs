@@ -38,6 +38,7 @@ public class SolverStopOnChange : Solver, IBloatLettersSolver
                 if (stringRepresentation.Contains(solverKey))
                 {
                     DoReduce(letters, i, solverLookupTable[solverKey]);
+                    yield return new WaitForSeconds(0.1f);
                     yield break;
                 }
             }
