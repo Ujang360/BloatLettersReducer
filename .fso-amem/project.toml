@@ -1,0 +1,6 @@
+[project]
+name = "ujang-bloatlettersreducer"
+slug = "ujang-bloatlettersreducer"
+
+[amem]
+server = "https://amem.flusci.org"
